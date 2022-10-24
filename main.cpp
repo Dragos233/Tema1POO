@@ -5,19 +5,21 @@ private:
     std::string numeDoctor="ceva";
     std::string specializare="ceva";
 public:
+        std::string get_numeDoctor() const {
+        return this->numeDoctor;
+    }
+    std::string get_specializare() const
+    {
+        return this->specializare;
+    }
+
     Doctor()=default;
     Doctor(const std::string& numeDoctor,const std::string& specializare){
         this->numeDoctor=numeDoctor;
         this->specializare=specializare;
         std::cout<<"Constr de initializare Doctor\n";
     }
-     std::string getNumeDoctor()  {
-        return numeDoctor;
-    }
 
-      std::string getSpecializare()  {
-        return specializare;
-    }
     Doctor(const Doctor& other) : numeDoctor(other.numeDoctor), specializare(other.specializare) {
         std::cout << "Constr de copiere Doctor\n";
     }
@@ -54,7 +56,7 @@ public:
     }
     friend std::ostream& operator<<(std::ostream& os,const Pacient& p)
     {
-        os<<"Nume "<<p.nume<<", numar telefon "<<p.numarTelefon<<", data programarii "<<p.dataProgramare<<",doctorul pacientului "<<p.doctor<<"\n";
+        os<<"Nume "<<p.nume<<", numar telefon "<<p.numarTelefon<<", data programarii "<<p.dataProgramare<<",doctorul pacientului "<<p.doctor.get_numeDoctor()<<", specializarea "<<p.doctor.get_specializare();
         return os;
     }
 
@@ -96,12 +98,14 @@ public:
 
 int main() {
     Doctor d("popescu popescu","Chirurg");
-    Doctor d1=d;
-    Serviciu s1("extractie",250,d1);
-    Serviciu s2("detartraj",320,d1);
-    s1=s2;
-    std::cout<<s2<<" "<<s1;
-    Pacient p1("Mihai","07123123","11.11.02",d1);
 
-    std::cout << "Numele doctorului este " << d.getNumeDoctor() << " iar specializarea sa este de " << d.getSpecializare() << "\n";
+    Doctor d2("popescu gigel","ortodont");
+    Serviciu s1("extractie",250,d);
+    Serviciu s2("detartraj",320,d);
+    s1=s2;
+    std::cout<<d2<<"\n";
+    std::cout<<s2<<" "<<s1<<"\n";
+    Pacient p1("Mihai","07123123","11.11.02",d2);
+    std::cout<<p1<<"\n";
+    std::cout << "Numele doctorului este " << d.get_numeDoctor() << " iar specializarea sa este de " << d.get_specializare() << "\n";
 }
