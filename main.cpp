@@ -2,68 +2,46 @@
 #include <string>
 class Doctor{
 private:
-    std::string numeDoctor="ceva";
-    std::string specializare="ceva";
+    std::string numeDoctor=" ";
+    int nr_specializari = 0;
+    int salariu = 0;
 public:
-        std::string get_numeDoctor() const {
-        return this->numeDoctor;
+    int getNrSpecializari() const {
+        return nr_specializari;
     }
-    std::string get_specializare() const
-    {
-        return this->specializare;
-    }
-
     Doctor()=default;
-    Doctor(const std::string& numeDoctor,const std::string& specializare){
-        this->numeDoctor=numeDoctor;
-        this->specializare=specializare;
-        std::cout<<"Constr de initializare Doctor\n";
-    }
+    Doctor(const std::string &numeDoctor, int nrSpecializari, int salariu) : numeDoctor(numeDoctor),
+                                                                             nr_specializari(nrSpecializari),
+                                                                             salariu(salariu) {}
 
-    Doctor(const Doctor& other) : numeDoctor(other.numeDoctor), specializare(other.specializare) {
+    Doctor(const Doctor& other) : numeDoctor(other.numeDoctor), nr_specializari(other.nr_specializari), salariu(other.salariu) {
         std::cout << "Constr de copiere Doctor\n";
     }
     friend std::ostream& operator<<(std::ostream& os, const Doctor& dr)
     {
-        os<< "Nume "<<dr.numeDoctor<<", specializare "<<dr.specializare<<"\n";
+        os<<dr.numeDoctor<<", numar specializari "<<dr.nr_specializari<<", salariu "<<dr.salariu<<"\n";
         return os;
     }
-
-    Doctor& operator=(const Doctor& other) {
+    void marire(int procent)
+    {
+        if (getNrSpecializari() > 1) {
+            std::cout << "Doctorul avea un salariu de salariu " << salariu;
+            salariu *= procent;
+            std::cout << " iar acum are salariul de " << salariu << "\n";
+        }
+    }
+    Doctor& operator=(const Doctor& other)
+            {
         numeDoctor=other.numeDoctor;
-        specializare=other.specializare;
+        nr_specializari=other.nr_specializari;
+        salariu = other.salariu;
         std::cout << "operator= copiere Doctor\n";
         return *this;
     }
 };
 
-class Pacient
-{
-
-    std::string nume= "ceva";
-    std::string numarTelefon="ceva";
-    std::string dataProgramare="ceva";
-    Doctor doctor;
-public:
-
-    Pacient()=default;
-    Pacient(const std::string& nume, const std::string& numarTelefon, const std::string& dataProgramare, const Doctor& doctor)
-    {
-        this->nume=nume;
-        this->numarTelefon=numarTelefon;
-        this->dataProgramare=dataProgramare;
-        this->doctor=doctor;
-    }
-    friend std::ostream& operator<<(std::ostream& os,const Pacient& p)
-    {
-        os<<"Nume "<<p.nume<<", numar telefon "<<p.numarTelefon<<", data programarii "<<p.dataProgramare<<",doctorul pacientului "<<p.doctor.get_numeDoctor()<<", specializarea "<<p.doctor.get_specializare();
-        return os;
-    }
-
-};
-
 class Serviciu{
-    std::string denumire="ceva";
+    std::string denumire=" ";
     int pret=0;
     Doctor doctor;
 
@@ -87,25 +65,100 @@ public:
     }
     friend std::ostream& operator<<(std::ostream& os,const Serviciu& s)
     {
-        os<<"Denumirea serviciului "<<s.denumire<<", pretul serviciului "<<s.pret<<"\n";
+        os<<s.denumire<<", pretul serviciului "<<s.pret<<" lei\n";
         return os;
     }
     ~Serviciu() {
         std::cout<<"Destructor serviciu\n";
     }
+
+    int getPret() const {
+        return pret;
+    }
+
+
+    int reducere(int voucher, int p)
+    {
+        p -= voucher;
+        return p;
+    }
+
 };
+class Pacient
+{
+    int varsta = 0;
+    std::string nume = " ";
+    std::string numarTelefon =" ";
+    int an = 0 ;
+    int luna = 0;
+    int zi = 0;
+    Serviciu serviciu;
 
+public:
+    int getAn() const {
+        return an;
+    }
 
-int main() {
-    Doctor d("popescu popescu","Chirurg");
+    int getLuna() const {
+        return luna;
+    }
 
-    Doctor d2("popescu gigel","ortodont");
-    Serviciu s1("extractie",250,d);
-    Serviciu s2("detartraj",320,d);
-    s1=s2;
-    std::cout<<d2<<"\n";
-    std::cout<<s2<<" "<<s1<<"\n";
-    Pacient p1("Mihai","07123123","11.11.02",d2);
-    std::cout<<p1<<"\n";
-    std::cout << "Numele doctorului este " << d.get_numeDoctor() << " iar specializarea sa este de " << d.get_specializare() << "\n";
+    int getZi() const {
+        return zi;
+    }
+    void verif_data(const int& an_prezent, const int& luna_prezent , const int& zi_prezent)
+    {
+        if(an_prezent > getAn())
+            std::cout<<"Pacientul nu a fost inca operat!\n";
+        else if(luna_prezent > getLuna())
+            std::cout<<"Pacientul nu a fost inca operat!\n";
+        else if(zi_prezent > getZi())
+            std::cout<<"Pacientul nu a fost inca operat!\n";
+        else
+            std::cout<<"Pacientul a fost operat!\n";
+    }
+    Pacient()=default;
+
+    Pacient(int varsta, const std::string &nume, const std::string &numarTelefon, int an, int luna, int zi,const Serviciu &serviciu) : varsta(varsta), nume(nume), numarTelefon(numarTelefon), an(an), luna(luna), zi(zi),
+                                        serviciu(serviciu) {}
+
+    int getVarsta() const {
+        return varsta;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os,const Pacient& p)
+    {
+        os<<"Varsta:"<<p.varsta<<" Nume "<<p.nume<<", numar telefon "<<p.numarTelefon<<std::endl;
+        return os;
+
+    }
+
+};
+int main()
+{
+   Doctor d("popescu popescu",1, 2000);
+   Doctor d2("popescu gigel",4, 3000);
+   Serviciu s1("extractie",250,d);
+   Pacient p( 3, "ababei", "0712129", 2022 , 12, 13,s1);
+   std::cout<<s1.getPret()<<"\n";
+   p.verif_data(2023,11,13);
+
+   if (p.getVarsta()  < 18)
+   {
+       int pretRedus = s1.reducere(30, s1.getPret());
+       std::cout << pretRedus << "\n";
+   }
+   else
+       std::cout<<s1.getPret();
+   Serviciu s2("detartraj",320,d);
+   d2.marire(20);
+   s1=s2;
+   std::cout<<d2<<"\n";
+   std::cout<<s2<<" "<<s1<<"\n";
+   Pacient p1(20,"Mihai","07123123",2022, 11, 11, s1);
+   Pacient p2 = p1;
+   Doctor d3 = d;
+   std::cout<<"p2="<<p2<<"\n";
+   std::cout<<p1<<"\n";
+   std::cout<<d3;
 }
