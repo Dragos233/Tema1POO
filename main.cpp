@@ -171,12 +171,12 @@ int main()
    Doctor d2("popescu gigel",4, 3000);
    Serviciu s1("extractie",250,d);
    Pacient p( 3, "ababei", "0712129", 2022 , 12, 13,s1);
-    Pacient p1(20,"Mihai","07123123",2022, 12, 30, s1);
-    Pacient p2(25,"Andrei","072391248",2022,12,30,s1);
-    std::cout<<"Pretul serviciului s1 este "<<s1.getPret()<<"\n";
-    p.verif_data(2023,11,13);
+   Pacient p1(20,"Mihai","07123123",2022, 12, 30, s1);
+   Pacient p2(25,"Andrei","072391248",2022,12,30,s1);
+   std::cout<<"Pretul serviciului s1 este "<<s1.getPret()<<"\n";
+   p.verif_data(2023,11,13);
 
-    if (p.getVarsta()  < 18)
+   if (p.getVarsta()  < 18)
    {
        int pretRedus = s1.reducere(30, s1.getPret());
        std::cout <<"Pretul redus al serviciului este "<<pretRedus << "\n";
@@ -184,16 +184,16 @@ int main()
    else {
        std::cout<<s1.getPret();
    }
-    Serviciu s2("detartraj",320,d);
-    d2.marire(20);
-    s1=s2;
-    std::cout<<d2<<"\n";
-    std::cout<<s2<<" "<<s1<<"\n";
-    std::cout<<"Data originala era: "<<p2.getZi()<<" "<<p2.getLuna()<<" "<<p2.getAn()<<"\n";
+   Serviciu s2("detartraj",320,d);
+   d2.marire(20);
+   s1=s2;
+   std::cout<<d2<<"\n";
+   std::cout<<s2<<" "<<s1<<"\n";
+   std::cout<<"Data originala era: "<<p2.getZi()<<" "<<p2.getLuna()<<" "<<p2.getAn()<<"\n";
    p2.data_valida(p1.getAn(),p1.getLuna(),p1.getZi());
    std::cout<<"Data noua este: "<<p2.getZi()<<" "<<p2.getLuna()<<" "<<p2.getAn()<<"\n";
    Doctor d3 = d;
-   ///std::cout<<"p2="<<p2<<"\n";
-  /// std::cout<<p1<<"\n";
-   ///std::cout<<d3;
+   std::cout<<"p2="<<p2<<"\n";
+   std::cout<<p1<<"\n";
+   std::cout<<d3;
 }
