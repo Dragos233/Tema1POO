@@ -8,11 +8,8 @@ int Angajat::getSalariu() const
     return salariu;
 }
 
-Angajat::Angajat(const std::string &_nume, int _salariu) {
-    this->nume = _nume;
-    this->salariu = _salariu;
+Angajat::Angajat(const std::string &_nume, int _salariu): nume(_nume), salariu(_salariu) {}
 
-}
 
 void Angajat::print(std::ostream &out) const
 {

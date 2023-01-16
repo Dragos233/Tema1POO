@@ -2,8 +2,8 @@
 
 Doctor::Doctor(const std::string & _nume, int _salariu, int _nr_specializari) : Angajat(_nume, _salariu)
 {
-    if(nr_specializari < 1)
-       throw Eroare_specializari("Eroare specializare");
+    //if(nr_specializari < 1)
+       //throw Eroare_specializari("Eroare specializare");
 
     this->nr_specializari = _nr_specializari;
 }

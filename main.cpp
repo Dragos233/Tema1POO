@@ -16,6 +16,8 @@ int main()
     d.marire(30);
     s.addAngajat(a);
     s.addServiciu("extractie",250, a);
+    Serviciu s1("detartraj",180, a);
+    Serviciu::reducere(25, 180);
     Angajat* a2 = dynamic_cast<Doctor*>(&d);
     cout<<*a2;
     cout<<*p<<"\n";

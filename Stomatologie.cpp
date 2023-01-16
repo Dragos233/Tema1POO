@@ -36,12 +36,12 @@ void Stomatologie::addAngajat(const std::shared_ptr<Angajat>& a)
    a->setStomatologie(std::shared_ptr<Stomatologie>(this));
 }
 
-void Stomatologie::addServiciu(const std::string nume_serviciu, int pret, const std::shared_ptr<Angajat>& a)
+void Stomatologie::addServiciu(const std::string& nume_serviciu, int pret, const std::shared_ptr<Angajat>& a)
 {
     servicii.push_back(Serviciu(nume_serviciu, pret, a));
 }
 
-bool Stomatologie::programeaza(std::shared_ptr<Pacient> p, const std::string nume_serviciu)
+bool Stomatologie::programeaza(const std::shared_ptr<Pacient>& p, const std::string& nume_serviciu)
 {
     Serviciu* s = nullptr;
 
