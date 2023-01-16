@@ -21,6 +21,7 @@ int main()
     Angajat* a2 = dynamic_cast<Doctor*>(&d);
     cout<<*a2;
     cout<<*p<<"\n";
+    cout<<s1;
     s.programeaza(p,"extractie");
     cout<<*p1<<"\n";
     s.programeaza(p1,"extractie");
