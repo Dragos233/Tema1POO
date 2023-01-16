@@ -20,6 +20,10 @@ public:
 
     int getSalariu() const;
 
+    void Angajat::setStomatologie(const std::shared_ptr<Stomatologie>& _stomatologie);
+
+    const std::shared_ptr<Stomatologie> &Angajat::getStomatologie() const;
+
     Angajat(const std::string &_nume, int _salariu);
 
     Angajat(const Angajat &other);

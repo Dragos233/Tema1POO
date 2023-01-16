@@ -1,4 +1,8 @@
 #include "Angajat.h"
+void Angajat::setStomatologie(const std::shared_ptr<Stomatologie>& _stomatologie)
+{
+    stomatologie = _stomatologie;
+}
 int Angajat::getSalariu() const
 {
     return salariu;
@@ -15,6 +19,11 @@ void Angajat::print(std::ostream &out) const
     out<<"Nume: "<<nume<<"\n";
     out<<"Salariu: "<<salariu<<"\n";
 }
+
+const std::shared_ptr<Stomatologie> &Angajat::getStomatologie() const {
+    return stomatologie;
+}
+
 
 Angajat::Angajat(const Angajat& other)
 {
