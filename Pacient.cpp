@@ -4,10 +4,7 @@ const std::string& Pacient::getNume () const
 {
     return nume;
 }
-const std::string& Pacient::getNumarTelefon () const
-{
-    return numarTelefon;
-}
+
 void Pacient::setServiciu(Serviciu* _serviciu, int _zi, int _luna, int _an)
 {
     this->serviciu = _serviciu;
@@ -40,19 +37,17 @@ void Pacient::setFinalizat(bool _finalizat)
     finalizat = _finalizat;
 }
 
-int Pacient::getVarsta() const
-{
-    return varsta;
-}
-bool Pacient::isFinalizat()
+bool Pacient::isFinalizat () const
 {
     return finalizat;
 }
-Pacient::Pacient(int varsta, const std::string &nume, const std::string &numarTelefon) : varsta(varsta), nume(nume), numarTelefon(numarTelefon) {}
+
+int Pacient::id_max = 0;
+Pacient::Pacient(int _varsta, const std::string& _nume, const std::string& _numarTelefon) :  id(++id_max), varsta(_varsta), nume(_nume), numarTelefon(_numarTelefon)  {}
 
 std::ostream& operator<<(std::ostream& os,const Pacient& p)
 {
-    os<<"Pacient: "<<p.nume<<"\nVarsta: "<<p.varsta<<"\nTel: "<<p.numarTelefon<<std::endl;
+    os<<"Pacient: "<<p.nume<<"\nID: "<<p.id<<" Varsta: "<<p.varsta<<"\nTel: "<<p.numarTelefon<<std::endl;
     if(p.serviciu!= nullptr)
     {
         os << "Serviciu: " << p.serviciu->getDenumire();

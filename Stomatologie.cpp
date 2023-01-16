@@ -28,7 +28,7 @@ std::vector<std::shared_ptr<Pacient>> Stomatologie::getPacienti()
     return vector_pacienti;
 }
 
-Stomatologie::Stomatologie(int _zi, int _luna, int _an): zi(_zi), luna(_luna), an(_an){};
+Stomatologie::Stomatologie(int _zi, int _luna, int _an): zi(_zi), luna(_luna), an(_an){}
 
 void Stomatologie::addAngajat(const std::shared_ptr<Angajat>& a)
 {

@@ -26,7 +26,7 @@ public:
 
     int getPret() const;
 
-    int reducere(int voucher, int p);
+    static int reducere(int voucher, int p);
 
     friend std::ostream &operator<<(std::ostream &os, const Serviciu &s);
 

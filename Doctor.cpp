@@ -1,33 +1,33 @@
-
 #include "Doctor.h"
-int Doctor::getNrSpecializari() const {
-    return nr_specializari;
-}
-Doctor::Doctor(const std::string &numeDoctor, int nrSpecializari, int salariu) : numeDoctor(numeDoctor),
-                                                                         nr_specializari(nrSpecializari),
-                                                                         salariu(salariu) {}
 
-Doctor::Doctor(const Doctor& other) : numeDoctor(other.numeDoctor), nr_specializari(other.nr_specializari), salariu(other.salariu) {
-    std::cout << "Constr de copiere Doctor\n";
-}
-std::ostream& operator<<(std::ostream& os, const Doctor& dr)
+Doctor::Doctor(const std::string & _nume, int _salariu, int _nr_specializari) : Angajat(_nume, _salariu)
 {
-    os<<dr.numeDoctor<<", numar specializari "<<dr.nr_specializari<<", salariu "<<dr.salariu<<"\n";
-    return os;
+    if(nr_specializari < 1)
+       throw Eroare_specializari("Eroare specializare");
+
+    this->nr_specializari = _nr_specializari;
 }
-void Doctor::marire(int procent)
+
+
+
+void Doctor::print(std::ostream& out) const
 {
-    if (getNrSpecializari() > 1) {
-        std::cout << "Doctorul avea un salariu de salariu " << salariu;
-        salariu *= procent;
-        std::cout << " iar acum are salariul de " << salariu << "\n";
-    }
+    Angajat::print(out);
+    out<<"Numar specializari: "<<nr_specializari<<"\n";
 }
-Doctor& Doctor::operator=(const Doctor& other)
+
+Doctor& Doctor::operator=(const Doctor &other)
 {
-    numeDoctor=other.numeDoctor;
-    nr_specializari=other.nr_specializari;
+    nume = other.nume;
     salariu = other.salariu;
-    std::cout << "operator= copiere Doctor\n";
+    nr_specializari = other.nr_specializari;
     return *this;
 }
+
+
+
+void Doctor::marire(int procent)
+{
+    salariu += (salariu * procent) / 100;
+}
+

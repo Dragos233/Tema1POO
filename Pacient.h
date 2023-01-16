@@ -11,6 +11,8 @@ class Stomatologie;
 
 class Pacient
 {
+    int id;
+    static int id_max;
     int varsta = 0;
     std::string nume = "";
     std::string numarTelefon ="";
@@ -26,14 +28,12 @@ public:
     Serviciu *getServiciu() const;
     void setServiciu(Serviciu* serviciu, int zi, int luna, int an);
     const std::string &getNume() const;
-    const std::string &getNumarTelefon() const;
-    int getVarsta() const;
     int getAn() const;
     int getLuna() const;
     int getZi() const;
     Pacient(int varsta, const std::string &nume, const std::string &numarTelefon);
     void setFinalizat(bool _finalizat);
-    bool isFinalizat();
+    bool isFinalizat() const;
     friend std::ostream& operator<<(std::ostream& os,const Pacient& p);
 
 };

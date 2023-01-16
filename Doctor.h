@@ -2,23 +2,22 @@
 #define MAIN_CPP_DOCTOR_H
 #include <string>
 #include <iostream>
-class Doctor {
-private:
-    std::string numeDoctor = " ";
-    int nr_specializari = 0;
-    int salariu = 0;
+#include "Eroare_specializari.h"
+#include "Angajat.h"
+class Doctor : public Angajat
+{
+    int nr_specializari{0};
 public:
-    int getNrSpecializari() const;
 
     Doctor() = default;
+    ~Doctor() override = default;
+    Doctor(const std::string &nume, int salariu, int nr_specializari);
 
-    Doctor(const std::string &numeDoctor, int nrSpecializari, int salariu);
-
-    Doctor(const Doctor &other);
-
-    friend std::ostream &operator<<(std::ostream &os, const Doctor &dr);
+    //bool ok = false;
 
     void marire(int procent);
+
+    void print(std::ostream& out) const override;
 
     Doctor &operator=(const Doctor &other);
 };
