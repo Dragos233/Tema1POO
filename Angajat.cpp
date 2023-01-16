@@ -20,9 +20,6 @@ void Angajat::print(std::ostream &out) const
     out<<"Salariu: "<<salariu<<"\n";
 }
 
-const std::shared_ptr<Stomatologie> &Angajat::getStomatologie() const {
-    return stomatologie;
-}
 
 
 Angajat::Angajat(const Angajat& other)
